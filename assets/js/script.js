@@ -1,74 +1,22 @@
-var events = {}
 // display current date
 $("#currentDay").text(moment().format('LL'));
 
-// create an event
-var createEvent = function(eventText, eventTime, eventList) {
-  // create elements that make up an event item
-    var eventLi = $("<li>").addClass("list-group-item");
-    var eventSpan = $("<span>").addClass("badge").text(eventTime);
-    var eventP = $("<p>").addClass("m-1").text(eventText);
+$(".saveBtn").on("click", function(){
+  var text = $(this).siblings(".description").val();
+  var time= $(this).parent().attr("id");
 
-
-    // append span and p element to parent li
-  eventLi.append(eventSpan, eventP);
-
-  // check due date
-  auditEvent(eventLi);
-
-  // append to ul list on the page
-  $("#list-" + eventList).append(eventLi);
-}
-
-$(".list-group").on("click", "p", function(){
-  console.log("<p> was clicked");
-});
+  localStorage.setItem(time, text);
+})
 
 // load events
+$("#hour9 .description").val(localStorage.getItem("hour9"));
+$("#hour10 .description").val(localStorage.getItem("hour10"));
+$("#hour11 .description").val(localStorage.getItem("hour11"));
+$("#hour12 .description").val(localStorage.getItem("hour12"));
+$("#hour13 .description").val(localStorage.getItem("hour13"));
+$("#hour14 .description").val(localStorage.getItem("hour14"));
+$("#hour15 .description").val(localStorage.getItem("hour15"));
+$("#hour16 .description").val(localStorage.getItem("hour16"));
+$("#hour17 .description").val(localStorage.getItem("hour17"));
 
-// save events
-var saveEvents = function () {
-    localStorage.setItem("events", JSON.stringify(events));
-    console.log("event saved")
-  };
-
-  $(".btn").click(function (){
-    // get form values
-    var eventText = $("#list-event").val();
-    var eventTime = $("#time").val();
-
-    if (eventText && eventTime) {
-      createTask(eventText, eventTime);
-  
-      // save in tasks array
-      events.push({
-        text: eventText,
-        date: eventTime
-      });
-  
-      saveEvents();
-    }
-  })
-  // event text was clicked
-$(".list-group").on("click", "p", function () {
-    // get current text of p element
-    var text = $(this)
-      .text()
-      .trim();
-  
-    // replace p element with a new textarea
-    var textInput = $("<textarea>").addClass("form-control").val(text);
-    $(this).replaceWith(textInput);
-
-      // update task in array and re-save to localstorage
-  tasks[status][index].text = text;
-  saveEvents();
-
-  // recreate p element
-  var eventP = $("<p>")
-    .addClass("m-1")
-    .text(text);
-
-  // replace textarea with new content
-  $(this).replaceWith(eventP);
-});
+// color coding per time
