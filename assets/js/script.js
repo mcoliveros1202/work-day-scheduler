@@ -1,7 +1,6 @@
 var events = {}
-// display current date: moment().format('LL');
+// display current date
 $("#currentDay").text(moment().format('LL'));
-
 
 // create an event
 var createEvent = function(eventText, eventTime, eventList) {
@@ -33,6 +32,23 @@ var saveEvents = function () {
     console.log("event saved")
   };
 
+  $(".btn").click(function (){
+    // get form values
+    var eventText = $("#list-event").val();
+    var eventTime = $("#time").val();
+
+    if (eventText && eventTime) {
+      createTask(eventText, eventTime);
+  
+      // save in tasks array
+      events.push({
+        text: eventText,
+        date: eventTime
+      });
+  
+      saveEvents();
+    }
+  })
   // event text was clicked
 $(".list-group").on("click", "p", function () {
     // get current text of p element
