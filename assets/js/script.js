@@ -9,15 +9,15 @@ $(".saveBtn").on("click", function () {
 })
 
 // load events
-$("#9 .description").val(localStorage.getItem("hour9"));
-$("#10 .description").val(localStorage.getItem("hour10"));
-$("#11 .description").val(localStorage.getItem("hour11"));
-$("#12 .description").val(localStorage.getItem("hour12"));
-$("#13 .description").val(localStorage.getItem("hour13"));
-$("#14 .description").val(localStorage.getItem("hour14"));
-$("#15 .description").val(localStorage.getItem("hour15"));
-$("#16 .description").val(localStorage.getItem("hour16"));
-$("#17 .description").val(localStorage.getItem("hour17"));
+$("#9 .description").val(localStorage.getItem("9"));
+$("#10 .description").val(localStorage.getItem("10"));
+$("#11 .description").val(localStorage.getItem("11"));
+$("#12 .description").val(localStorage.getItem("12"));
+$("#13 .description").val(localStorage.getItem("13"));
+$("#14 .description").val(localStorage.getItem("14"));
+$("#15 .description").val(localStorage.getItem("15"));
+$("#16 .description").val(localStorage.getItem("16"));
+$("#17 .description").val(localStorage.getItem("17"));
 
 // color coding time audit
 var auditTime = function() {
@@ -25,11 +25,9 @@ var auditTime = function() {
 var currentTime = moment().hour();
 
 // loop over time blocks to audit time (if/else statement)
-$(".time-block").each(function () {
+$(".time-block").each(function (index, element) {
   
-var eventHour = parseInt($(".time-block").attr("id"));
-
-console.log(eventHour, currentTime)
+var eventHour = parseInt($(element).attr("id"));
 
 // if the event hour is less than current time, add .past and remove all others
 if (eventHour < currentTime) {
@@ -39,7 +37,7 @@ if (eventHour < currentTime) {
 
 
 // if the eventHour is equal in all ways to the current time, add .present and remove all others
-} else if (eventHour = currentTime) {
+} else if (eventHour === currentTime) {
   $(this).addClass("present");
   $(this).removeClass("past");
   $(this).removeClass("future");
